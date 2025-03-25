@@ -61,6 +61,7 @@ public class Game
     public void initialize()
     {
         //to test, create a player, trophy, grid, treasure, and enemies. Then call placeSprite() to put them on the grid
+        boolean quit = false;
         int size = 10;
         Grid grid = new Grid(size);
         Player player = new Player(0, 0);
@@ -71,28 +72,71 @@ public class Game
         Trophy trophy = new Trophy(9, 9);
         Scanner scan = new Scanner(System.in);
 
-        while (player.getLives() > 0 || player.getWin())
+        grid.placeSprite(enemy);
+        grid.placeSprite(enemy2);
+        grid.placeSprite(treasure);
+        grid.placeSprite(treasure2);
+        grid.placeSprite(player);
+        grid.placeSprite(trophy);
+        grid.display();
+
+        while (!quit)
         {
             grid.placeSprite(enemy);
             grid.placeSprite(enemy2);
-            grid.placeSprite(treasure);
-            grid.placeSprite(treasure2);
-            grid.placeSprite(player);
-            // player is not getting deleted from previous position
-            grid.placeSprite(trophy);
-            grid.display();
 
             System.out.print("Enter directional movement(WASD): ");
             String direction = scan.nextLine().toLowerCase();
 
             if (player.isValid(size, direction))
             {
-                player.interact(size, direction, 2, grid.getGrid()[size - 1 - player.getY()][player.getX()]);
+                System.out.println(grid.getGrid()[size - 1 - player.getY()][player.getX()]);
+                
+                switch (direction)
+                {
+                    case "w":
+                        player.interact(size, direction, 2, grid.getGrid()[size - 2 - player.getY()][player.getX()]);
+                        break;
+                    case "a":
+                        player.interact(size, direction, 2, grid.getGrid()[size - 1 - player.getY()][player.getX() - 1]);
+                        break;
+                       
+                    case "s":
+                        player.interact(size, direction, 2, grid.getGrid()[size - player.getY()][player.getX()]);
+                        break;
+                        
+                    case "d":
+                        player.interact(size, direction, 2, grid.getGrid()[size - 1 - player.getY()][player.getX() + 1]);
+                        break;
+                }
+
                 player.move(direction);
                 grid.placeSprite(player, direction);
             }
 
+            clearScreen();
             grid.display();
+
+            if (player.getLives() <= 0)
+            {
+                quit = true;
+                grid.gameover();
+            }
+            
+            if (player.getWin())
+            {
+                quit = true;
+                grid.win();
+            }
+        }
+
+        try 
+        {
+            Thread.sleep(3000);
+        } 
+        catch (InterruptedException e) 
+        {
+            e.printStackTrace();
         }
     }
 

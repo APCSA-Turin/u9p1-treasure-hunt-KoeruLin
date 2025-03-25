@@ -90,7 +90,20 @@ public class Grid
     // use this method to display a loss
     public void gameover()
     {
+        System.out.println(" Y   Y   OOO    U   U      L       OOO    SSSSS   EEEEE");
+        System.out.println("  Y Y   O   O   U   U      L      O   O   S        E");
+        System.out.println("   Y    O   O   U   U      L      O   O   SSSSS    EEEE");
+        System.out.println("   Y    O   O   U   U      L      O   O       S    E");
+        System.out.println("   Y     OOO     UUU       L       OOO    SSSSS   EEEEE");
+    }
 
+    public void win()
+    {
+        System.out.println(" Y   Y   OOO   U   U    W   W   III   N   N");
+        System.out.println("  Y Y   O   O  U   U    W   W    I    NN  N");
+        System.out.println("   Y    O   O  U   U    W W W    I    N N N");
+        System.out.println("   Y    O   O  U   U    WW WW    I    N  NN");
+        System.out.println("   Y     OOO    UUU     W   W   III   N   N");
     }
 }
  
