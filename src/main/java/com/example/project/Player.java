@@ -25,6 +25,11 @@ public class Player extends Sprite
         return numLives;
     }
 
+    public void setLives(int numLives)
+    {
+        this.numLives = numLives;
+    }
+
     public boolean getWin()
     {
         return win;

@@ -9,7 +9,7 @@ public class Game
     private Enemy[] enemies;
     private Treasure[] treasures;
     private Trophy trophy;
-    private int size; 
+    private int size;
 
     public Game(int size)
     { //the constructor should call initialize() and play()
@@ -99,14 +99,17 @@ public class Game
         if (difficulty.equals("easy"))
         {
             size = (int)(Math.random() * 3) + 10;
+            player.setLives((int)((Math.random() * 5)) + 4);
         }
         else if (difficulty.equals("medium"))
         {
             size = (int)(Math.random() * 4) + 15;
+            player.setLives((int)((Math.random() * 3)) + 2);
         }
         else
         {
             size = (int)(Math.random() * 5) + 17;
+            player.setLives((int)((Math.random() * 2)) + 1);
         }
 
         Grid grid = new Grid(size);
@@ -153,13 +156,7 @@ public class Game
 
             grid.placeSprite(trophy3);
         }
-        
-        /*grid.placeSprite(enemy);
-        grid.placeSprite(enemy2);
-        grid.placeSprite(treasure);
-        grid.placeSprite(treasure2);
-        grid.placeSprite(player);
-        grid.placeSprite(trophy);*/
+
         grid.display();
 
         while (!quit)
