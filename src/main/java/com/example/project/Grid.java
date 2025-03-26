@@ -63,23 +63,23 @@ public class Grid
             {
                 if (sprite instanceof Player)
                 {
-                    System.out.print("PP");
+                    System.out.print("👾");
                 }
                 else if (sprite instanceof Enemy)
                 {
-                    System.out.print("EE");
+                    System.out.print("⚔️");
                 }
                 else if (sprite instanceof Treasure && !(sprite instanceof Trophy))
                 {
-                    System.out.print("Tt");
+                    System.out.print("💎");
                 }
                 else if (sprite instanceof Trophy)
                 {
-                    System.out.print("TT");
+                    System.out.print("🏆");
                 }
                 else
                 {
-                    System.out.print("[]");
+                    System.out.print("🀄");
                 }
             }    
 

@@ -87,7 +87,7 @@ public class Game
         Treasure treasure7 = new Treasure(9, 9);
         Treasure treasure8 = new Treasure(15, 15);
         Treasure treasure9 = new Treasure(2, 2);
-        Trophy trophy3 = new Trophy(18, 18);
+        Trophy trophy3 = new Trophy(18, 19);
 
         Sprite[] easy = {treasure, treasure2, enemy, enemy2};
         Sprite[] medium = {treasure3, treasure4, treasure5, enemy3, enemy4, enemy5};
@@ -108,7 +108,7 @@ public class Game
         }
         else
         {
-            size = (int)(Math.random() * 5) + 17;
+            size = (int)(Math.random() * 5) + 19;
             player.setLives((int)((Math.random() * 2)) + 1);
         }
 
@@ -172,6 +172,7 @@ public class Game
                 grid.placeSprite(enemy7);
                 grid.placeSprite(enemy8);
                 grid.placeSprite(enemy9);
+                grid.placeSprite(trophy3);
             }
             else if (difficulty.equals("medium"))
             {
@@ -180,12 +181,15 @@ public class Game
                 grid.placeSprite(enemy3);
                 grid.placeSprite(enemy4);
                 grid.placeSprite(enemy5);
+                grid.placeSprite(trophy2);
             }
             else
             {
                 grid.placeSprite(enemy);
                 grid.placeSprite(enemy2);
+                grid.placeSprite(trophy);
             }
+
 
             System.out.print("Enter directional movement(WASD): ");
             String direction = scan.nextLine().toLowerCase();
