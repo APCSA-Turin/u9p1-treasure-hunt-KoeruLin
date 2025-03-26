@@ -15,7 +15,7 @@ public class Grid
         {
             for (int j = 0; j < grid[0].length; j++)
             {
-                grid[i][j] = new Dot(i, j);
+                grid[i][j] = new Dot(i, j); // replaces every position in grid with a dot object
             }
         }
     }
@@ -35,26 +35,32 @@ public class Grid
     public void placeSprite(Sprite s, String direction)
     {
         grid[size - 1 - s.getY()][s.getX()] = s;  
+        // converts carterian plane coordinates into 2d array coordinates and places sprite in that 2d array coordinate
 
+        // replaces the previous position player was in with a dot object
         switch (direction)
         {
             case "w":
+                // if player moves up then replace the tile below it with a dot object
                 grid[size - s.getY()][s.getX()] = new Dot(s.getX(), s.getY() + 1);
                 break;
             case "a":
+                // if player moves left then replace the tile to the right with a dot object
                 grid[size - 1 - s.getY()][s.getX() + 1] = new Dot(s.getX() + 1, s.getY());
                 break;
             case "s":
+                // if player moves right then replace the tile to the left with a dot object
                 grid[size - 2 - s.getY()][s.getX()] = new Dot(s.getX(), s.getY() - 1);
                 break;
             case "d":
+                // if player moves down then place the tile above it with a dot object
                 grid[size - 1 - s.getY()][s.getX() - 1] = new Dot(s.getX() - 1, s.getY());
                 break;
         }
     }
-    // potential issue for one of the test cases, not turning treasure into a dot
 
     // print out the current grid to the screen
+    // checks the instance on each position of the grid and prints the appropriate sprite for it
     public void display()
     {
         for (Sprite[] row : grid)
@@ -88,6 +94,7 @@ public class Grid
     }
 
     // use this method to display a loss
+    // if player lives becomes 0 then this lose message is printed and game ends
     public void gameover()
     {
         System.out.println(" Y   Y   OOO    U   U      L       OOO    SSSSS   EEEEE");
@@ -97,6 +104,7 @@ public class Grid
         System.out.println("   Y     OOO     UUU       L       OOO    SSSSS   EEEEE");
     }
 
+    // if player wins then this win message is printed and game ends
     public void win()
     {
         System.out.println(" Y   Y   OOO   U   U    W   W   III   N   N");

@@ -66,12 +66,14 @@ public class Game
         int totalTreasures = 0;
         Player player = new Player(0, 0);
         
+        // enemies and treasures in easy mode
         Enemy enemy = new Enemy(5, 5);
         Enemy enemy2 = new Enemy(7,8);
         Treasure treasure = new Treasure(2, 2);
         Treasure treasure2 = new Treasure(1,7);
         Trophy trophy = new Trophy(9, 9);
 
+        // enemies and treasures in medium mode
         Enemy enemy3 = new Enemy(6, 2);
         Enemy enemy4 = new Enemy(12, 13);
         Enemy enemy5 = new Enemy(9, 10);
@@ -80,6 +82,7 @@ public class Game
         Treasure treasure5 = new Treasure(4, 5);
         Trophy trophy2 = new Trophy(15, 15);
 
+        // enemies and treasures in hard mode
         Enemy enemy6 = new Enemy(15, 16);
         Enemy enemy7 = new Enemy(20, 21);
         Enemy enemy8 = new Enemy(17, 19);
@@ -90,6 +93,7 @@ public class Game
         Treasure treasure9 = new Treasure(2, 2);
         Trophy trophy3 = new Trophy(18, 19);
 
+        // used to initialize everything at the beginning
         Sprite[] easy = {treasure, treasure2, enemy, enemy2};
         Sprite[] medium = {treasure3, treasure4, treasure5, enemy3, enemy4, enemy5};
         Sprite[] hard = {enemy6, enemy7, enemy8, enemy9, treasure6, treasure7, treasure8, treasure9};
@@ -97,6 +101,8 @@ public class Game
         System.out.print("Select Difficulty(Easy, Medium, Hard): ");
         String difficulty = scan.nextLine().toLowerCase();
 
+        // depending on difficulty size is randomized to be within a certain range and lives is set to a random amount, total treasures is set to current difficulty enemies + previous difficulty enemies
+        // as difficulty increases the map size increases and lives decreases
         if (difficulty.equals("easy"))
         {
             size = (int)(Math.random() * 3) + 10;
@@ -118,6 +124,7 @@ public class Game
 
         Grid grid = new Grid(size);
 
+        // places every object depending on difficulty
         if (difficulty.equals("easy"))
         {
             for (Sprite sprite : easy)
@@ -163,8 +170,10 @@ public class Game
 
         grid.display();
 
+        // constantly running to update grid
         while (!quit)
         {
+            // constantly setting enemy on grid even when player tries to overwrite it so enemy isn't overwritten with dot object
             if (difficulty.equals("hard"))
             {
                 grid.placeSprite(enemy);
@@ -194,45 +203,53 @@ public class Game
                 grid.placeSprite(trophy);
             }
 
-
+            // input to get direction
             System.out.print("Enter directional movement(WASD): ");
             String direction = scan.nextLine().toLowerCase();
 
+            // checks if directional movement is valid
             if (player.isValid(size, direction))
             {
-                System.out.println(grid.getGrid()[size - 1 - player.getY()][player.getX()]);
-                
+                // calls interact based on direction, totalTreasures in the map, and the player's supposed previous position if the move function was to be called with that directional input                
                 switch (direction)
                 {
                     case "w":
+                        // if up then player's y position is one below the supposed position
                         player.interact(size, direction, totalTreasures, grid.getGrid()[size - 2 - player.getY()][player.getX()]);
                         break;
                     case "a":
+                        // if left then player's x position is one below the supposed position
                         player.interact(size, direction, totalTreasures, grid.getGrid()[size - 1 - player.getY()][player.getX() - 1]);
                         break;
                        
                     case "s":
+                        // if right then player's x position is one above the supposed position
                         player.interact(size, direction, totalTreasures, grid.getGrid()[size - player.getY()][player.getX()]);
                         break;
                         
                     case "d":
+                        // if down then player's y position is one above the supposed position
                         player.interact(size, direction, totalTreasures, grid.getGrid()[size - 1 - player.getY()][player.getX() + 1]);
                         break;
                 }
 
+                // after interact is calculated then move player into that position and places the sprite there
                 player.move(direction);
                 grid.placeSprite(player, direction);
             }
 
+            // clears screen to avoid a mess in terminal
             clearScreen();
             grid.display();
 
+            // quits the loop and lose message is printed if player lives ever become less than and equal to zero
             if (player.getLives() <= 0)
             {
                 quit = true;
                 grid.gameover();
             }
             
+            // quits loop and win message is printed if player wins the game and gets the trophy
             if (player.getWin())
             {
                 quit = true;
@@ -253,6 +270,7 @@ public class Game
 
     public static void main(String[] args)
     {
+        // makes a game instance so game can start
         Game game = new Game(10);
     }
 }
