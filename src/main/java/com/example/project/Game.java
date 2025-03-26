@@ -63,6 +63,7 @@ public class Game
         boolean quit = false;
         Scanner scan = new Scanner(System.in);
         int size = 0;
+        int totalTreasures = 0;
         Player player = new Player(0, 0);
         
         Enemy enemy = new Enemy(5, 5);
@@ -100,16 +101,19 @@ public class Game
         {
             size = (int)(Math.random() * 3) + 10;
             player.setLives((int)((Math.random() * 5)) + 4);
+            totalTreasures = 2;
         }
         else if (difficulty.equals("medium"))
         {
-            size = (int)(Math.random() * 4) + 15;
+            size = (int)(Math.random() * 4) + 17;
             player.setLives((int)((Math.random() * 3)) + 2);
+            totalTreasures = 5;
         }
         else
         {
-            size = (int)(Math.random() * 5) + 19;
+            size = (int)(Math.random() * 4) + 22;
             player.setLives((int)((Math.random() * 2)) + 1);
+            totalTreasures = 8;
         }
 
         Grid grid = new Grid(size);
@@ -201,18 +205,18 @@ public class Game
                 switch (direction)
                 {
                     case "w":
-                        player.interact(size, direction, 2, grid.getGrid()[size - 2 - player.getY()][player.getX()]);
+                        player.interact(size, direction, totalTreasures, grid.getGrid()[size - 2 - player.getY()][player.getX()]);
                         break;
                     case "a":
-                        player.interact(size, direction, 2, grid.getGrid()[size - 1 - player.getY()][player.getX() - 1]);
+                        player.interact(size, direction, totalTreasures, grid.getGrid()[size - 1 - player.getY()][player.getX() - 1]);
                         break;
                        
                     case "s":
-                        player.interact(size, direction, 2, grid.getGrid()[size - player.getY()][player.getX()]);
+                        player.interact(size, direction, totalTreasures, grid.getGrid()[size - player.getY()][player.getX()]);
                         break;
                         
                     case "d":
-                        player.interact(size, direction, 2, grid.getGrid()[size - 1 - player.getY()][player.getX() + 1]);
+                        player.interact(size, direction, totalTreasures, grid.getGrid()[size - 1 - player.getY()][player.getX() + 1]);
                         break;
                 }
 

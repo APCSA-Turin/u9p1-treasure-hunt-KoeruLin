@@ -61,7 +61,7 @@ public class Player extends Sprite
     {
         if (isValid(size, direction))
         {
-            if (treasureCount == numTreasures && obj instanceof Trophy)
+            if (treasureCount >= numTreasures && obj instanceof Trophy)
             {
                 win = true;
             }
