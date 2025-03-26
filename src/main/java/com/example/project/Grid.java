@@ -88,7 +88,7 @@ public class Grid
                     System.out.print("🀄");
                 }
             }    
-
+            
             System.out.println();
         }
     }

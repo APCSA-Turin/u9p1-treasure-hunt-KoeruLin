@@ -174,6 +174,7 @@ public class Game
         while (!quit)
         {
             // constantly setting enemy on grid even when player tries to overwrite it so enemy isn't overwritten with dot object
+            // trophy is treated the same to enemy
             if (difficulty.equals("hard"))
             {
                 grid.placeSprite(enemy);
