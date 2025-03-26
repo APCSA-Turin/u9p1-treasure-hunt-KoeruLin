@@ -167,7 +167,8 @@ public class Game
 
             grid.placeSprite(trophy3);
         }
-
+        
+        grid.placeSprite(player);
         grid.display();
 
         // constantly running to update grid
